@@ -1,4 +1,4 @@
-# Social Network — Python/FastAPI backend on Kubernetes
+# X-like application — Python/FastAPI backend on Kubernetes
 
 Next.js frontend + BFF, backend as six FastAPI microservices behind their own MongoDB databases, Redis cache in front of the hottest reads, deployed to Kubernetes.
 
