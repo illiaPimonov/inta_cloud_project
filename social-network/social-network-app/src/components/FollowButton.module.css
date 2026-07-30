@@ -1,0 +1,34 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 0 16px;
+  height: 32px;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.follow {
+  background: var(--color-text-primary);
+  color: var(--color-surface);
+}
+
+.follow:hover {
+  opacity: 0.85;
+}
+
+.following {
+  background: transparent;
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+}
+
+.following:hover {
+  color: var(--color-destructive);
+  border-color: var(--color-destructive-border);
+  background: var(--color-destructive-bg);
+}

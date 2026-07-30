@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: social-network
+spec:
+  replicas: 3
+  selector:
+    matchLabels: { app: web }
+  template:
+    metadata:
+      labels: { app: web }
+    spec:
+      containers:
+        - name: web
+          image: social-network/web:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: USERS_SERVICE_URL
+              value: "http://users-service:8080"
+            - name: POSTS_SERVICE_URL
+              value: "http://posts-service:8080"
+            - name: ENGAGEMENT_SERVICE_URL
+              value: "http://engagement-service:8080"
+            - name: NOTIFICATIONS_SERVICE_URL
+              value: "http://notifications-service:8080"
+            - name: MESSAGES_SERVICE_URL
+              value: "http://messages-service:8080"
+            - name: SEARCH_SERVICE_URL
+              value: "http://search-service:8080"
+          readinessProbe:
+            httpGet: { path: /login, port: 3000 }
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits: { cpu: 500m, memory: 512Mi }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  namespace: social-network
+spec:
+  selector: { app: web }
+  ports:
+    - port: 3000
+      targetPort: 3000

@@ -1,0 +1,126 @@
+.sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  border-right: 1px solid var(--color-border);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.logo {
+  margin: 0 12px 20px;
+  flex-shrink: 0;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  border-radius: var(--radius-pill);
+  color: var(--color-text-primary);
+  font-size: 17px;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+
+.navItem:hover {
+  background: var(--color-surface-elevated);
+}
+
+.navItem.active {
+  background: var(--color-surface-elevated);
+}
+
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.navLabel {
+  color: var(--color-text-secondary);
+}
+
+.navItem.active .navLabel {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.badge {
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  padding: 1px 7px;
+}
+
+.postBtn {
+  height: 48px;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 12px;
+  border: none;
+}
+
+.postBtn:hover {
+  opacity: 0.9;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.accountWrap {
+  position: relative;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.account:hover,
+.account.open {
+  background: var(--color-surface-elevated);
+}
+
+.accountInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.accountName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.accountHandle {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}

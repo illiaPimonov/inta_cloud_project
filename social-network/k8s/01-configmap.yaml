@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: social-network
+data:
+  MONGO_CONNECTION_STRING: "mongodb://mongo:27017"
+  CORS_ALLOWED_ORIGIN: "http://localhost:3000"
+  REDIS_URL: "redis://redis:6379/0"

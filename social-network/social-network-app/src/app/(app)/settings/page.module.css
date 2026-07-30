@@ -1,0 +1,256 @@
+.wrap {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
+
+.nav {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  border-right: 1px solid var(--color-border);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  padding: 0 12px 16px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-primary);
+  font-size: 15px;
+  background: none;
+  border: none;
+  text-align: left;
+}
+
+.navItem:hover {
+  background: var(--color-surface-elevated);
+}
+
+.navItem.active {
+  background: var(--color-surface-elevated);
+  font-weight: 600;
+}
+
+.panel {
+  flex: 1;
+  min-width: 0;
+  padding: 40px 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.panelTitle {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 420px;
+}
+
+.fieldLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.fieldValue {
+  height: 44px;
+  background: var(--color-surface-elevated);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  color: var(--color-text-primary);
+  font-size: 15px;
+  border: 1px solid transparent;
+  outline: none;
+}
+
+.fieldValue:focus-within,
+input.fieldValue:focus {
+  border-color: var(--color-accent);
+}
+
+.fieldValue.fieldError {
+  border-color: var(--color-destructive);
+}
+
+.fieldErrorText {
+  font-size: 13px;
+  color: var(--color-destructive);
+}
+
+.divider {
+  height: 1px;
+  background: var(--color-border);
+  max-width: 420px;
+}
+
+.dangerZone {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 420px;
+}
+
+.dangerTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.dangerSubtitle {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.dangerBtn {
+  align-self: flex-start;
+  background: transparent;
+  color: var(--color-destructive);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 18px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-destructive-border);
+  margin-top: 4px;
+}
+
+.dangerBtn:hover {
+  background: var(--color-destructive-bg);
+}
+
+.placeholder {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  max-width: 420px;
+  line-height: 1.6;
+}
+
+.toggleList {
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+}
+
+.toggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.toggleRow:last-child {
+  border-bottom: none;
+}
+
+.toggleLabel {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.toggleSubtitle {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
+
+.switch {
+  width: 40px;
+  height: 24px;
+  border-radius: var(--radius-pill);
+  border: none;
+  flex-shrink: 0;
+  position: relative;
+  background: var(--color-border);
+  transition: background 0.15s ease;
+}
+
+.switch.switchOn {
+  background: var(--color-accent);
+}
+
+.switchThumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-pill);
+  background: #fff;
+  transition: transform 0.15s ease;
+}
+
+.switch.switchOn .switchThumb {
+  transform: translateX(16px);
+}
+
+.saveBar {
+  max-width: 420px;
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.saveBarText {
+  font-size: 14px;
+  color: var(--color-text-primary);
+}
+
+.saveBarActions {
+  display: flex;
+  gap: 8px;
+}
+
+.cancelBtn {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  padding: 0 14px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+}
+
+.saveBtn {
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 16px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  border-radius: var(--radius-sm);
+  border: none;
+}

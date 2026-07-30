@@ -1,0 +1,76 @@
+.feed {
+  flex: 1;
+  min-width: 0;
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.addFeedBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  background: none;
+  flex-shrink: 0;
+}
+
+.addFeedBtn:hover {
+  background: var(--color-surface-elevated);
+}
+
+.composer {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.composerRow {
+  display: flex;
+  gap: 12px;
+}
+
+.composerPrompt {
+  flex: 1;
+  color: var(--color-text-tertiary);
+  font-size: 16px;
+  padding-top: 8px;
+  background: none;
+  border: none;
+  text-align: left;
+}
+
+.composerActions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.newPostsPill {
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-accent);
+  font-size: 14px;
+  font-weight: 600;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  width: 100%;
+}
+
+.newPostsPill:hover {
+  background: var(--color-surface-elevated);
+}
+
+.list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}

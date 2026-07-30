@@ -1,0 +1,36 @@
+.card {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.card.padded {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.name:hover {
+  text-decoration: underline;
+}
+
+.handle {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.bio {
+  font-size: 13px;
+  color: var(--color-text-primary);
+  margin-top: 4px;
+}

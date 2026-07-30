@@ -1,0 +1,94 @@
+.column {
+  flex: 1;
+  min-width: 0;
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.cover {
+  height: 200px;
+  background: linear-gradient(135deg, #1c2230, #141820);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.avatarWrap {
+  position: absolute;
+  bottom: -44px;
+  left: 24px;
+}
+
+.editBtn {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 18px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  border-radius: var(--radius-pill);
+  border: 1px solid #4a5158;
+}
+
+.editBtn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.info {
+  padding: 56px 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.handle {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+}
+
+.bio {
+  font-size: 15px;
+  color: var(--color-text-primary);
+}
+
+.metaRow {
+  display: flex;
+  gap: 16px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.statsRow {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.statValue {
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
+
+.statLabel {
+  color: var(--color-text-secondary);
+}

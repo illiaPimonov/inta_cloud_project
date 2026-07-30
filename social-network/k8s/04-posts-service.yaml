@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-service
+  namespace: social-network
+spec:
+  replicas: 3
+  selector:
+    matchLabels: { app: posts-service }
+  template:
+    metadata:
+      labels: { app: posts-service }
+    spec:
+      initContainers:
+        - name: wait-for-mongo
+          image: busybox:1.36
+          command:
+            - sh
+            - -c
+            - until nc -z mongo 27017; do echo waiting for mongo; sleep 2; done
+      containers:
+        - name: posts-service
+          image: social-network/posts-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef: { name: backend-config }
+          env:
+            - name: MONGO_DATABASE_NAME
+              value: "postsdb"
+          readinessProbe:
+            httpGet: { path: /health, port: 8080 }
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /health, port: 8080 }
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          resources:
+            requests: { cpu: 50m, memory: 96Mi }
+            limits: { cpu: 250m, memory: 256Mi }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-service
+  namespace: social-network
+spec:
+  selector: { app: posts-service }
+  ports:
+    - port: 8080
+      targetPort: 8080
