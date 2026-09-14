@@ -29,6 +29,8 @@ spec:
           env:
             - name: MONGO_DATABASE_NAME
               value: "postsdb"
+            - name: CACHE_TTL_SECONDS
+              value: "8"
           readinessProbe:
             httpGet: { path: /health, port: 8080 }
             initialDelaySeconds: 5

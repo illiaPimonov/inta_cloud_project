@@ -14,7 +14,16 @@ _redis = Redis.from_url(
     socket_timeout=1,
 )
 
+stats = {"totalRequests": 0, "mongoReads": 0}
+
 async def cached_json(key: str, ttl_seconds: int, compute):
+    stats["totalRequests"] += 1
+
+    if ttl_seconds <= 0:
+        stats["mongoReads"] += 1
+        result = await compute()
+        return jsonable_encoder(result)
+
     try:
         cached = await _redis.get(key)
         if cached is not None:
@@ -22,6 +31,7 @@ async def cached_json(key: str, ttl_seconds: int, compute):
     except RedisError:
         pass
 
+    stats["mongoReads"] += 1
     result = await compute()
     encoded = jsonable_encoder(result)
 

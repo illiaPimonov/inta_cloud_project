@@ -1,3 +1,4 @@
+import os
 import re
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
@@ -8,12 +9,13 @@ from bson.errors import InvalidId
 from fastapi import FastAPI, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
 
-from .cache import cached_json, invalidate_prefix
+from .cache import cached_json, invalidate_prefix, stats
 from .db import db, serialize, CORS_ALLOWED_ORIGIN
 from .models import CounterUpdateRequest, CreatePostRequest
 from .seed import ensure_seeded
 
 POSTS_LIST_CACHE_PREFIX = "posts:list:"
+CACHE_TTL_SECONDS = int(os.environ.get("CACHE_TTL_SECONDS", "8"))
 
 def valid_object_id(id_: str) -> bool:
     try:
@@ -76,7 +78,15 @@ async def list_posts(
         return [serialize(d) for d in docs]
 
     cache_key = f"{POSTS_LIST_CACHE_PREFIX}{authorHandle or '-'}:{query or '-'}:{type or '-'}:{media}"
-    return await cached_json(cache_key, ttl_seconds=8, compute=compute)
+    return await cached_json(cache_key, ttl_seconds=CACHE_TTL_SECONDS, compute=compute)
+
+@app.get("/debug/cache-stats")
+async def cache_stats():
+    return {
+        "cacheTtlSeconds": CACHE_TTL_SECONDS,
+        "totalRequests": stats["totalRequests"],
+        "mongoReads": stats["mongoReads"],
+    }
 
 @app.get("/posts/{id}")
 async def get_post(id: str):

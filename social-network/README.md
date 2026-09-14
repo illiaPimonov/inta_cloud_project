@@ -1,4 +1,4 @@
-# X-like application — Python/FastAPI backend on Kubernetes
+# X-like application - Python/FastAPI backend on Kubernetes
 
 Next.js frontend + BFF, backend as six FastAPI microservices behind their own MongoDB databases, Redis cache in front of the hottest reads, deployed to Kubernetes.
 
@@ -35,7 +35,7 @@ docker build -t social-network/search-service:latest        services/search-serv
 docker build -t social-network/web:latest                   social-network-app
 ```
 
-`mongo:7` and `redis:7-alpine` are pulled from Docker Hub directly — no build needed.
+`mongo:7` and `redis:7-alpine` are pulled from Docker Hub directly - no build needed.
 
 ## Load images into your cluster
 
@@ -70,7 +70,7 @@ kubectl -n social-network get pods -w
 kubectl -n social-network port-forward svc/web 3000:3000
 ```
 
-http://localhost:3000 — login **jordan@site.com** / any password.
+http://localhost:3000 - login **jordan@site.com** / any password.
 
 With an ingress controller installed: `k8s/10-ingress.yaml` routes `social-network.local` to `web`.
 
@@ -90,11 +90,23 @@ kubectl -n social-network port-forward svc/users-service 5001:8080
 # → http://localhost:5001/docs
 ```
 
+## Tests
+
+Each backend service has a small pytest suite under `services/<name>/tests/` covering its main endpoints against an in-memory fake MongoDB (no cluster, Mongo, or Redis required).
+
+```bash
+pip install -r requirements-test.txt
+for d in services/*/; do pip install -r "$d/requirements.txt"; done
+./run_tests.sh
+```
+
+`run_tests.sh` just loops over each service and runs `pytest` inside it - they share the package name `app`, so they can't be collected in one combined `pytest` invocation from the repo root. To run a single service by hand: `cd services/<name> && pytest`.
+
 ## Notes
 
 - Every backend service + `web` run 3 replicas; `mongo` runs 1 (single instance, not HA).
 - First-boot seeding is race-safe across replicas via a Mongo-based lock (`acquire_seed_lock()` in each `app/db.py`).
 - Redis caches 3 endpoints: `search-service GET /trends` (30s TTL), `users-service GET /users/suggestions` (30s TTL), `posts-service GET /posts` (8s TTL, invalidated on write). Redis is best-effort — a Redis outage just disables caching, doesn't take services down.
 - `engagement`/`notifications` `type` values are lowercase (`like`, `repost`, `bookmark`, `follow`, `reply`, `mention`).
-- `search-service`'s internal `SearchDoc.type` is `"user"`/`"post"` (string, not int) — unused by the frontend today.
+- `search-service`'s internal `SearchDoc.type` is `"user"`/`"post"` (string, not int) - unused by the frontend today.
 - Known simplifications: demo-only auth (any non-empty password), no cross-service transactions, no handle-rename cascade, only a desktop (1440px) layout.
